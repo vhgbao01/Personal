@@ -1,4 +1,3 @@
-
 @echo off
 
 echo Repairing system image, please wait

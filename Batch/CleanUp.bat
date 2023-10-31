@@ -1,4 +1,3 @@
-
 @echo off
 
 echo Cleaning system junk files, please wait
