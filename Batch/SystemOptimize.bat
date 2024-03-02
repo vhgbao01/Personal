@@ -82,8 +82,8 @@ set HighPerf=8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 for /f "tokens=2 Delims=:(" %%a in ('powercfg /getactivescheme') do for /f %%b in ("%%a") do set CurrentPlan=%%b
 if "%CurrentPlan%"=="%Balanced%" (Powercfg /s "%HighPerf%")
 
-echo Restoring classic context menu... 
-reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+@REM echo Restoring classic context menu... 
+@REM reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 
 echo Opening privacy settings...
 start ms-settings:privacy
