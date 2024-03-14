@@ -23,13 +23,13 @@
 ## Generate SSH key
 
 ```bash
-ssh-keygen -t ed25519 -b 4096 -f "~/.ssh/{keyname}" -C "{email}"
+ssh-keygen -t ed25519 -b 4096 -f "~/.ssh/{keyname}" -C "{name/email}"
 ```
 
 ## Add SSH key to ssh-agent
 
 ```bash
-ssh-agent -k && eval "$(ssh-agent -s)"  # kill and start ssh-agent [optional]
+ssh-agent -k ; eval "$(ssh-agent -s)"  # kill and start ssh-agent [optional]
 ssh-add ~/.ssh/{keyname}
 ```
 
