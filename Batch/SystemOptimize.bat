@@ -68,13 +68,14 @@ echo Disabling limit reserval bandwidth...
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f
 
 echo Disabling Delivery Optimization...
+net stop DoSvc
 sc config DoSvc start=disabled > NUL 2>&1
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
 
 echo Disabling Windows Defender features...
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpyNetReporting" /t REG_DWORD /d "0" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
-powershell -ExecutionPolicy Bypass -NoProfile -NoExit -Command '& {Add-MpPreference -ExclusionPath \"C:\Program Files\Windows Defender\"}'
+powershell -ExecutionPolicy Bypass -NoProfile -NoExit -Command "& {Add-MpPreference -ExclusionPath 'C:\Program Files\Windows Defender'}"
 
 echo Switching to High Performance power plan...
 set Balanced=381b4222-f694-41f0-9685-ff5bb260df2e
