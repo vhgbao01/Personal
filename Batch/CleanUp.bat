@@ -21,13 +21,18 @@ del /f /s /q “%userprofile%\Local Settings\Temporary Internet Files\*.*”
 del /f /s /q “%userprofile%\Local Settings\Temp\*.*”
 del /f /s /q “%userprofile%\recent\*.*”
 
-net stop bits
-net stop wuauserv
-net stop cryptsvc   
-del /s /q /f %SystemRoot%\SoftwareDistribution\*.* && FOR /D %%p IN ("%SystemRoot%\SoftwareDistribution\*.*") DO rmdir "%%p" /s /q
+net stop bits /y
+net stop wuauserv /y
+net stop cryptsvc /y
+net stop msiserver /y
+net stop appidsvc /y
+powershell Remove-Item %Systemroot%\SoftwareDistribution -Force -Recurse -ErrorAction Ignore
+powershell Remove-Item %Systemroot%\System32\catroot2 -Force -Recurse -ErrorAction Ignore
 net start bits
 net start wuauserv
 net start cryptsvc
+net start msiserver
+net start appidsvc
 
 netsh windsock reset
 netsh int ip reset
