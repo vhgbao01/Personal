@@ -5,6 +5,10 @@
   - [Add SSH key to ssh-agent](#add-ssh-key-to-ssh-agent)
   - [Start SSH server](#start-ssh-server)
   - [Add SSH key to server](#add-ssh-key-to-server)
+  - [SSH config](#ssh-config)
+    - [Only allow SSH key authentication](#only-allow-ssh-key-authentication)
+- [VNC](#vnc)
+  - [Ubuntu](#ubuntu)
 - [Package managers](#package-managers)
   - [APT](#apt)
   - [Brew](#brew)
@@ -46,6 +50,60 @@ sudo ufw allow ssh  # [optional]
   
 ```bash
 ssh-copy-id -i ~/.ssh/{keyname}.pub {user}@{host}
+```
+
+## SSH config
+
+### Only allow SSH key authentication
+
+**Note**: Make sure to add your SSH Public Key using `ssh-copy-id` or paste it to `~/.ssh/authorized_keys` on the server before disabling password authentication, otherwise you will be locked out.
+
+
+```bash
+sudo nano /etc/ssh/sshd_config
+
+---------------------------------------------------------
+PermitRootLogin no
+#PermitRootLogin prohibit-password
+
+PasswordAuthentication no
+UsePAM no
+ChallengeResponseAuthentication no
+PrintMotd no # [optional]
+---------------------------------------------------------
+
+sudo systemctl reload ssh
+```
+
+# VNC
+
+## Ubuntu
+
+```bash
+sudo apt install -y xfce4 xfce4-goodies tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer dbus-x11
+```
+
+```bash
+sudo nano ~/.vnc/xstartup
+
+---------------------------------------------------------
+#!/bin/sh
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+#vncconfig -iconic
+#dbus-launch --exit-with-session gnome-session &
+startxfce4
+----------------------------------------------------------
+
+sudo chmod +x ~/.vnc/xstartup
+```
+
+```bash
+crontab -e
+
+---------------------------------------------------------
+@reboot vncserver -localhost 0 :1
+---------------------------------------------------------
 ```
 
 &nbsp;

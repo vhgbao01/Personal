@@ -1,11 +1,11 @@
 # Table of Contents <!-- omit from toc -->
 
 - [Advanced Reconnaissance Methodology](#advanced-reconnaissance-methodology)
-- [Best Kali mirror server](#best-kali-mirror-server)
 - [Lists](#lists)
   - [Wordlists](#wordlists)
   - [Resolvers](#resolvers)
 - [ProjectDiscovery Suite](#projectdiscovery-suite)
+  - [Installation](#installation)
   - [HTTPX](#httpx)
   - [Subfinder](#subfinder)
   - [Katana](#katana)
@@ -32,13 +32,6 @@
 </p>
 
 &nbsp;
-# Best Kali mirror server
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/IceM4nn/mirrorscript-v2/master/mirrorscript-v2.py | python -
-```
-
-&nbsp;
 # Lists
 
 ## Wordlists
@@ -54,7 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/IceM4nn/mirrorscript-v2/master/mirr
 &nbsp;
 # ProjectDiscovery Suite
 
-**Installation**
+## Installation
 
 ```bash
 go install -v github.com/projectdiscovery/pdtm/cmd/pdtm@latest
